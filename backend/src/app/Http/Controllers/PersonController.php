@@ -2,41 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PersonResource;
+use App\Http\Resources\PersonWithRelationsResource;
 use App\Models\Person;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return AnonymousResourceCollection
      */
     public function index()
     {
-        //
+        $people = Person::all();
+
+        return PersonWithRelationsResource::collection($people);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return PersonResource
      */
     public function store(Request $request)
     {
-        //
+        $person = Person::create($request->only(
+            ['last_name',
+            'first_name',
+            'email',
+            'mobile_number',
+            'home_zip',
+            'memo',
+            'created_at',
+            'updated_at']
+        ));
+
+        return new PersonResource($person);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Person  $person
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return PersonWithRelationsResource
      */
-    public function show(Person $person)
+    public function show(int $id)
     {
-        //
+        $person = Person::findOrFail($id);
+
+        return new PersonWithRelationsResource($person);
     }
 
     /**
