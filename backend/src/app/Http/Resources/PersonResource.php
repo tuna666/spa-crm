@@ -21,6 +21,7 @@ class PersonResource extends JsonResource
             'email' => $this->email,
             'mobile_number' => $this->mobile_number,
             'home_zip' => $this->home_zip,
+            'home_address' => $this->home_address,
             'memo' => $this->memo,
             'created_at' => $this->created_at->isoFormat('YYYY/M/D/(ddd) HH:mm:ss'),
             'updated_at' => $this->updated_at->isoFormat('YYYY/M/D/(ddd) HH:mm:ss'),
