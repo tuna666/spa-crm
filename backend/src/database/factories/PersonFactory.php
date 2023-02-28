@@ -21,8 +21,8 @@ class PersonFactory extends Factory
             'first_name' => fake()->firstName(),
             'email' => fake()->unique()->safeEmail(),
             'mobile_number' => '09012345678',
-            'home_address' => fake()->address(),
             'home_zip' => fake()->postcode(),
+            'home_address' => fake()->address(),
             'memo' => fake()->realText(35),
         ];
     }
